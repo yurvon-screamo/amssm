@@ -1,13 +1,24 @@
-import { useState } from 'react';
-import { Calendar, Clock } from 'lucide-react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Script, ScriptExecutionFormData } from '@/types/script';
-import { Equipment } from '@/types/project';
+import { useState } from "react";
+import { Calendar, Clock } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Script, ScriptExecutionFormData } from "@/types/script";
+import { Equipment } from "@/types/project";
 
 interface ScriptExecutionDialogProps {
   script: Script;
@@ -27,7 +38,9 @@ export function ScriptExecutionDialog({
     parameters: {},
   });
   const [isScheduled, setIsScheduled] = useState(false);
-  const [scheduleType, setScheduleType] = useState<'once' | 'recurring'>('once');
+  const [scheduleType, setScheduleType] = useState<"once" | "recurring">(
+    "once"
+  );
 
   const handleExecute = () => {
     // TODO: Implement script execution
@@ -68,7 +81,7 @@ export function ScriptExecutionDialog({
             {script.parameters.map((param) => (
               <div key={param.id} className="space-y-2">
                 <Label>{param.name}</Label>
-                {param.type === 'boolean' ? (
+                {param.type === "boolean" ? (
                   <Switch
                     checked={!!formData.parameters[param.id]}
                     onCheckedChange={(checked) =>
@@ -83,8 +96,8 @@ export function ScriptExecutionDialog({
                   />
                 ) : (
                   <Input
-                    type={param.type === 'number' ? 'number' : 'text'}
-                    value={formData.parameters[param.id] ?? ''}
+                    type={param.type === "number" ? "number" : "text"}
+                    value={formData.parameters[param.id] ?? ""}
                     onChange={(e) =>
                       setFormData({
                         ...formData,
@@ -103,10 +116,7 @@ export function ScriptExecutionDialog({
 
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <Switch
-                checked={isScheduled}
-                onCheckedChange={setIsScheduled}
-              />
+              <Switch checked={isScheduled} onCheckedChange={setIsScheduled} />
               <Label>Schedule Execution</Label>
             </div>
 
@@ -114,16 +124,18 @@ export function ScriptExecutionDialog({
               <div className="space-y-4 pl-6">
                 <div className="flex items-center gap-4">
                   <Button
-                    variant={scheduleType === 'once' ? 'default' : 'outline'}
-                    onClick={() => setScheduleType('once')}
+                    variant={scheduleType === "once" ? "default" : "outline"}
+                    onClick={() => setScheduleType("once")}
                     size="sm"
                   >
                     <Calendar className="w-4 h-4 mr-2" />
                     Once
                   </Button>
                   <Button
-                    variant={scheduleType === 'recurring' ? 'default' : 'outline'}
-                    onClick={() => setScheduleType('recurring')}
+                    variant={
+                      scheduleType === "recurring" ? "default" : "outline"
+                    }
+                    onClick={() => setScheduleType("recurring")}
                     size="sm"
                   >
                     <Clock className="w-4 h-4 mr-2" />
@@ -131,14 +143,14 @@ export function ScriptExecutionDialog({
                   </Button>
                 </div>
 
-                {scheduleType === 'once' ? (
+                {scheduleType === "once" ? (
                   <Input
                     type="datetime-local"
                     onChange={(e) =>
                       setFormData({
                         ...formData,
                         schedule: {
-                          type: 'once',
+                          type: "once",
                           executeAt: e.target.value,
                         },
                       })
@@ -151,7 +163,7 @@ export function ScriptExecutionDialog({
                       setFormData({
                         ...formData,
                         schedule: {
-                          type: 'recurring',
+                          type: "recurring",
                           cron: e.target.value,
                         },
                       })
@@ -167,7 +179,7 @@ export function ScriptExecutionDialog({
               Cancel
             </Button>
             <Button onClick={handleExecute}>
-              {isScheduled ? 'Schedule' : 'Execute'}
+              {isScheduled ? "Schedule" : "Execute"}
             </Button>
           </div>
         </div>

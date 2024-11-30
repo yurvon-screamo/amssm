@@ -1,26 +1,32 @@
-import { Plus } from 'lucide-react';
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Project } from '@/types/project';
-import { ScriptCard } from './ScriptCard';
-import { ScriptDialog } from './ScriptDialog';
+import { Plus } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Project } from "@/types/project";
+import { ScriptCard } from "./ScriptCard";
+import { ScriptDialog } from "./ScriptDialog";
 
 interface ScriptListProps {
   project: Project;
 }
 
 export function ScriptList({ project }: ScriptListProps) {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [typeFilter, setTypeFilter] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [typeFilter, setTypeFilter] = useState<string>("all");
   const [showCreateDialog, setShowCreateDialog] = useState(false);
 
   const filteredScripts = project.scripts.filter((script) => {
     const matchesSearch = script.name
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
-    const matchesType = typeFilter === 'all' || script.type === typeFilter;
+    const matchesType = typeFilter === "all" || script.type === typeFilter;
     return matchesSearch && matchesType;
   });
 

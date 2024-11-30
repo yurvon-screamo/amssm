@@ -1,12 +1,23 @@
-import { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Script, ScriptType, ScriptParameter } from '@/types/script';
-import { ScriptParameterEditor } from './ScriptParameterEditor';
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Script, ScriptType, ScriptParameter } from "@/types/script";
+import { ScriptParameterEditor } from "./ScriptParameterEditor";
 
 interface ScriptDialogProps {
   script?: Script;
@@ -14,10 +25,14 @@ interface ScriptDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function ScriptDialog({ script, open, onOpenChange }: ScriptDialogProps) {
-  const [name, setName] = useState(script?.name ?? '');
-  const [type, setType] = useState<ScriptType>(script?.type ?? 'bash');
-  const [content, setContent] = useState(script?.content ?? '');
+export function ScriptDialog({
+  script,
+  open,
+  onOpenChange,
+}: ScriptDialogProps) {
+  const [name, setName] = useState(script?.name ?? "");
+  const [type, setType] = useState<ScriptType>(script?.type ?? "bash");
+  const [content, setContent] = useState(script?.content ?? "");
   const [parameters, setParameters] = useState<ScriptParameter[]>(
     script?.parameters ?? []
   );
@@ -32,7 +47,7 @@ export function ScriptDialog({ script, open, onOpenChange }: ScriptDialogProps) 
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>
-            {script ? 'Edit Script' : 'Create New Script'}
+            {script ? "Edit Script" : "Create New Script"}
           </DialogTitle>
         </DialogHeader>
 
@@ -48,7 +63,10 @@ export function ScriptDialog({ script, open, onOpenChange }: ScriptDialogProps) 
             </div>
             <div className="space-y-2">
               <Label>Type</Label>
-              <Select value={type} onValueChange={(value) => setType(value as ScriptType)}>
+              <Select
+                value={type}
+                onValueChange={(value) => setType(value as ScriptType)}
+              >
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>

@@ -57,7 +57,7 @@ export interface TaskExecution {
   scriptName: string;
   equipmentId: string;
   equipmentName: string;
-  parameters: Record<string, any>;
+  parameters: Record<string, string>;
   status: 'scheduled' | 'running' | 'completed' | 'failed';
   scheduledFor?: string;
   startedAt?: string;

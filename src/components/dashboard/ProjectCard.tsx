@@ -1,9 +1,9 @@
-import { format } from 'date-fns';
-import { Activity, Cpu, Code2 } from 'lucide-react';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Project } from '@/types/project';
-import { Button } from '@/components/ui/button';
+import { format } from "date-fns";
+import { Activity, Cpu, Code2 } from "lucide-react";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Project } from "@/types/project";
+import { Button } from "@/components/ui/button";
 
 interface ProjectCardProps {
   project: Project;
@@ -12,7 +12,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, onDoubleClick }: ProjectCardProps) {
   return (
-    <Card 
+    <Card
       className="relative overflow-hidden border border-muted transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(0,255,255,0.15)] cursor-pointer"
       onDoubleClick={onDoubleClick}
     >
@@ -24,11 +24,13 @@ export function ProjectCard({ project, onDoubleClick }: ProjectCardProps) {
           </div>
           <div>
             <h3 className="font-semibold text-lg">{project.name}</h3>
-            <p className="text-sm text-muted-foreground">{project.description}</p>
+            <p className="text-sm text-muted-foreground">
+              {project.description}
+            </p>
           </div>
         </div>
-        <Badge 
-          variant={project.status === 'active' ? 'default' : 'secondary'}
+        <Badge
+          variant={project.status === "active" ? "default" : "secondary"}
           className="bg-gradient-to-r from-primary/80 to-secondary/80 text-background"
         >
           {project.status}
@@ -44,13 +46,13 @@ export function ProjectCard({ project, onDoubleClick }: ProjectCardProps) {
             <div className="flex items-center space-x-1 text-secondary">
               <Activity className="h-4 w-4" />
               <span>
-                {format(new Date(project.lastConnection), 'MMM d, HH:mm')}
+                {format(new Date(project.lastConnection), "MMM d, HH:mm")}
               </span>
             </div>
           </div>
-          
-          <Button 
-            variant="outline" 
+
+          <Button
+            variant="outline"
             className="w-full hover:bg-primary/10 hover:text-primary"
             onClick={(e) => {
               e.stopPropagation();
